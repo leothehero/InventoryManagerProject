@@ -13,9 +13,31 @@ public class CommonItem { //Rename to CommonItemContainer? It might be a better 
 		this.quantity = capacity; // Quantity is initialized to its capacity; indicating that the Item is full upon creation. Set capacity to 0 and use expandCapacity() if you wish to create an empty container.
 	}
 	
-	public void extendCapacity(int extraCapacity) throws InvalidParameterException {
-		capacity+=extraCapacity;
+	public void extendCapacity(int change) throws InvalidParameterException {
+		if (change<1) {
+			throw new InvalidParameterException("The Change parameter must not be negative or zero.");
+		}
+		capacity+=change;
 	}
+	
+	public boolean reduceCapacity(int change) throws InvalidParameterException {
+		if (change<1) {
+			throw new InvalidParameterException("The Change parameter must not be negative or zero.");
+		}
+		if (getFreeSpace()<change) {
+			return false;
+		}
+		else {
+			capacity-=change;
+			return true;
+		}
+
+	}
+	
+	public int getFreeSpace() {
+		return capacity-quantity;
+	}
+	
 	
 	
 	
@@ -27,7 +49,7 @@ public class CommonItem { //Rename to CommonItemContainer? It might be a better 
 		if (change<1) {
 			throw new InvalidParameterException("The Change parameter must not be negative or zero.");
 		}
-		if (capacity-quantity>=change) {
+		if (getFreeSpace()>=change) {
 			quantity+=change;
 			return true;
 		}
