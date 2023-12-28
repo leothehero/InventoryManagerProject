@@ -1,13 +1,16 @@
 package entities;
 
 import java.security.InvalidParameterException;
+import java.util.UUID;
 
 public class CommonItem { //Rename to CommonItemContainer? It might be a better descriptor.
 	String name;
 	int capacity;
 	int quantity;
+	UUID itemID;
 	
 	public CommonItem(String name, int capacity) {
+		this.itemID = UUID.randomUUID();
 		this.name = name;
 		this.capacity = capacity;
 		this.quantity = capacity; // Quantity is initialized to its capacity; indicating that the Item is full upon creation. Set capacity to 0 and use expandCapacity() if you wish to create an empty container.
@@ -57,6 +60,10 @@ public class CommonItem { //Rename to CommonItemContainer? It might be a better 
 			return false;
 		}
 		
+	}
+	
+	public UUID getID() {
+		return this.itemID;
 	}
 
 }

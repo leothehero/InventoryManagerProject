@@ -1,4 +1,4 @@
-package Boundaries;
+package boundaries;
 
 public class InventoryInterface {
 
